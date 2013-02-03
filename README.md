@@ -21,5 +21,10 @@ Yes, it's that simple. There are other ways to install Vagrant such as pre-built
 
 ## How do I run the examples?
 
-Coming soon... along with the example code.
+From one of the example directories, type the following commands...
+
+```
+vagrant up
+vagrant ssh
+```
 
