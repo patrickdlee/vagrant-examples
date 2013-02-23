@@ -1,0 +1,25 @@
+# Example 2
+#
+# Create a Lucid 32-bit box with some custom configuration defined in variables.
+#
+box = 'lucid32'
+url = 'http://files.vagrantup.com/lucid32.box'
+hostname = 'mylucidbox'
+ip = '192.168.0.42'
+ram = '256'
+local_code_dir = '/opt/code'
+
+Vagrant::Config.run do |config|
+  config.vm.box = box
+  config.vm.box_url = url
+
+  config.vm.host_name = hostname
+  config.vm.network :hostonly, ip
+  config.vm.share_folder 'code', '/home/vagrant/code', local_code_dir
+
+  config.vm.customize [
+    'modifyvm', :id,
+    '--name', hostname,
+    '--memory', ram
+  ]
+end
