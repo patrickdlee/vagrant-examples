@@ -1,0 +1,32 @@
+# Example 4
+#
+# Create a Precise 32-bit box with LAMP stack (Apache, PHP, and MySQL) installed via Puppet.
+#
+box      = 'precise32'
+url      = 'http://files.vagrantup.com/precise32.box'
+hostname = 'myprecisebox'
+domain   = 'example.com'
+ip       = '192.168.0.42'
+ram      = '256'
+code_dir = '/opt/code'
+
+Vagrant::Config.run do |config|
+  config.vm.box = box
+  config.vm.box_url = url
+
+  config.vm.host_name = hostname + '.' + domain
+  config.vm.network :hostonly, ip
+  config.vm.share_folder 'code', '/home/vagrant/code', code_dir
+
+  config.vm.customize [
+    'modifyvm', :id,
+    '--name', hostname,
+    '--memory', ram
+  ]
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+    puppet.manifest_file = 'site.pp'
+    puppet.module_path = 'puppet/modules'
+  end
+end
