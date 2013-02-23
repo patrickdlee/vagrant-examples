@@ -1,10 +1,10 @@
 # Example 2
 #
-# Create a Lucid 32-bit box with some custom configuration defined in variables.
+# Create a Precise 32-bit box with some custom configuration defined in variables.
 #
-box      = 'lucid32'
-url      = 'http://files.vagrantup.com/lucid32.box'
-hostname = 'mylucidbox'
+box      = 'precise32'
+url      = 'http://files.vagrantup.com/precise32.box'
+hostname = 'myprecisebox'
 domain   = 'example.com'
 ip       = '192.168.0.42'
 ram      = '256'
