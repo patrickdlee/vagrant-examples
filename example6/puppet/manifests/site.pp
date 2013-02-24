@@ -15,4 +15,13 @@ File {
   mode  => '0644',
 }
 
-include baseconfig, apache, mysql, php, apache-vhosts
+# all boxes get the base config
+include baseconfig
+
+node 'web' {
+  include apache, apache-vhosts, php
+}
+
+node 'db' {
+  include mysql
+}

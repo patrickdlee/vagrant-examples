@@ -7,5 +7,5 @@ class apache-vhosts {
     ensure => directory;
   }
 
-  apache-vhosts::vhost { ['static-site']: }
+  apache-vhosts::vhost { ['static-site', 'dynamic-site']: }
 }

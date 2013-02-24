@@ -1,28 +1,31 @@
 # Example 6
 #
-# Create a Precise 32-bit box with LAMP stack and sample virtual host via Puppet.
+# Separate Web and database servers serving up static/dynamic sites via Puppet.
 #
-box      = 'precise32'
-url      = 'http://files.vagrantup.com/precise32.box'
-hostname = 'myprecisebox'
 domain   = 'example.com'
-ip       = '192.168.0.42'
-ram      = '256'
 code_dir = '/opt/code'
 
+nodes = [
+  { :hostname => 'web', :ip => '192.168.0.42', :box => 'precise32' },
+  { :hostname => 'db',  :ip => '192.168.0.43', :box => 'precise32', :ram => 512 }
+]
+
 Vagrant::Config.run do |config|
-  config.vm.box = box
-  config.vm.box_url = url
+  nodes.each do |node|
+    config.vm.define node[:hostname] do |node_config|
+      node_config.vm.box = node[:box]
+      node_config.vm.host_name = node[:hostname] + '.' + domain
+      node_config.vm.network :hostonly, node[:ip]
+      node_config.vm.share_folder 'code', '/home/vagrant/code', code_dir
 
-  config.vm.host_name = hostname + '.' + domain
-  config.vm.network :hostonly, ip
-  config.vm.share_folder 'code', '/home/vagrant/code', code_dir
-
-  config.vm.customize [
-    'modifyvm', :id,
-    '--name', hostname,
-    '--memory', ram
-  ]
+      memory = node[:ram] ? node[:ram] : 256;
+      node_config.vm.customize [
+        'modifyvm', :id,
+        '--name', node[:hostname],
+        '--memory', memory.to_s
+      ]
+    end
+  end
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = 'puppet/manifests'
