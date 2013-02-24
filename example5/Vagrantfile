@@ -1,6 +1,6 @@
 # Example 5
 #
-# Create a Precise 32-bit box with LAMP stack and custom config files via Puppet.
+# Single box with LAMP stack and sample dynamic site via Puppet.
 #
 box      = 'precise32'
 url      = 'http://files.vagrantup.com/precise32.box'
