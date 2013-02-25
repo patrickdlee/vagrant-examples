@@ -2,6 +2,7 @@
 CREATE DATABASE IF NOT EXISTS dynamic;
 
 -- create a new user for the Web app
+DELETE FROM mysql.user WHERE User = 'webuser';
 CREATE USER 'webuser'@'%' IDENTIFIED BY 'vagrantrocks';
 
 -- grant only the necessary privileges to our new user

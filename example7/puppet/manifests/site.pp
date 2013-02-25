@@ -18,10 +18,22 @@ File {
 # all boxes get the base config
 include baseconfig
 
-node 'web' {
-  include apache, apache-vhosts, php
+node 'proxy' {
+  include nginx, nginx-vhosts
 }
 
 node 'db' {
   include mysql
+}
+
+node 'web1', 'web2' {
+  include apache, apache-vhosts, php
+}
+
+node 'static1', 'static2' {
+  include lighttpd
+}
+
+node 'cache' {
+  include memcache
 }

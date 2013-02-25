@@ -1,13 +1,18 @@
 # Example 7
 #
-# Create separate Web and database servers that serve up a dynamic Web site.
+# Pulling out all the stops with cluster of seven Vagrant boxes.
 #
 domain   = 'example.com'
 code_dir = '/opt/code'
 
 nodes = [
-  { :hostname => 'web', :ip => '192.168.0.42', :box => 'precise32' },
-  { :hostname => 'db',  :ip => '192.168.0.43', :box => 'precise32', :ram => 512 }
+  { :hostname => 'proxy',   :ip => '192.168.0.42', :box => 'precise32' },
+  { :hostname => 'db',      :ip => '192.168.0.43', :box => 'precise32' },
+  { :hostname => 'web1',    :ip => '192.168.0.44', :box => 'precise32' },
+  { :hostname => 'web2',    :ip => '192.168.0.45', :box => 'precise32' },
+  { :hostname => 'static1', :ip => '192.168.0.46', :box => 'precise32' },
+  { :hostname => 'static2', :ip => '192.168.0.47', :box => 'precise32' },
+  { :hostname => 'cache',   :ip => '192.168.0.48', :box => 'precise32' },
 ]
 
 Vagrant::Config.run do |config|

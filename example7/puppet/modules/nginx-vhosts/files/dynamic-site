@@ -1,0 +1,25 @@
+upstream web_cluster {
+	server web1:80;
+	server web2:80;
+}
+
+upstream static_cluster {
+	server static1:80;
+	server static2:80;
+}
+
+server {
+	listen 80;
+	server_name dynamic-site;
+
+	location /static/ {
+		proxy_pass http://static_cluster;
+		include /etc/nginx/proxy_params;
+	}
+
+	location / {
+		proxy_pass http://web_cluster;
+		include /etc/nginx/proxy_params;
+	}
+}
+
