@@ -1,6 +1,6 @@
 # == Class: memcache
 #
-# Installs Memcached. No configuration needed.
+# Installs Memcached and sets config file.
 #
 class memcache {
   package { 'memcached':
@@ -10,5 +10,11 @@ class memcache {
   service { 'memcached':
     ensure  => running,
     require => Package['memcached'];
+  }
+
+  file { '/etc/memcached.conf':
+    source  => 'puppet:///modules/memcache/memcached.conf',
+    require => Package['memcached'],
+    notify  => Service['memcached'];
   }
 }
