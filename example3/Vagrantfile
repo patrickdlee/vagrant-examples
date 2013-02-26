@@ -1,6 +1,6 @@
 # Example 3
 #
-# Create a Precise 32-bit box with example configuration defined in one Puppet module.
+# Single box with example configuration defined in one Puppet module.
 #
 box      = 'precise32'
 url      = 'http://files.vagrantup.com/precise32.box'
@@ -8,15 +8,12 @@ hostname = 'myprecisebox'
 domain   = 'example.com'
 ip       = '192.168.0.42'
 ram      = '256'
-code_dir = '/opt/code'
 
 Vagrant::Config.run do |config|
   config.vm.box = box
   config.vm.box_url = url
-
   config.vm.host_name = hostname + '.' + domain
   config.vm.network :hostonly, ip
-  config.vm.share_folder 'code', '/home/vagrant/code', code_dir
 
   config.vm.customize [
     'modifyvm', :id,

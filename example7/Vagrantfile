@@ -3,7 +3,6 @@
 # Pulling out all the stops with cluster of seven Vagrant boxes.
 #
 domain   = 'example.com'
-code_dir = '/opt/code'
 
 nodes = [
   { :hostname => 'proxy',   :ip => '192.168.0.42', :box => 'precise32' },
@@ -21,7 +20,6 @@ Vagrant::Config.run do |config|
       node_config.vm.box = node[:box]
       node_config.vm.host_name = node[:hostname] + '.' + domain
       node_config.vm.network :hostonly, node[:ip]
-      node_config.vm.share_folder 'code', '/home/vagrant/code', code_dir
 
       memory = node[:ram] ? node[:ram] : 256;
       node_config.vm.customize [

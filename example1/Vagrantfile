@@ -1,6 +1,6 @@
 # Example 1
 #
-# Create a Precise 32-bit box with default configuration.
+# Single box with default options.
 #
 Vagrant::Config.run do |config|
   config.vm.box = 'precise32'
