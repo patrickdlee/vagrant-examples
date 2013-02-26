@@ -7,11 +7,13 @@ define nginx_vhosts::vhost() {
     "/etc/nginx/sites-available/${name}":
       ensure  => present,
       source  => "puppet:///modules/nginx_vhosts/${name}",
-      require => Package['nginx'];
+      require => Package['nginx'],
+      notify  => Service['nginx'];
 
     "/etc/nginx/sites-enabled/${name}":
-      ensure => link,
-      target => "/etc/nginx/sites-available/${name}",
-      notify => Service['nginx'];
+      ensure  => link,
+      target  => "/etc/nginx/sites-available/${name}",
+      require => Package['nginx'],
+      notify  => Service['nginx'];
   }
 }

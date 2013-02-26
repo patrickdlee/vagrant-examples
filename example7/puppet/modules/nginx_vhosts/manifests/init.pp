@@ -3,5 +3,5 @@
 # Adds and enables virtual hosts.
 #
 class nginx_vhosts {
-  nginx_vhosts::vhost { ['dynamic-site']: }
+  nginx_vhosts::vhost { ['static-site', 'dynamic-site']: }
 }

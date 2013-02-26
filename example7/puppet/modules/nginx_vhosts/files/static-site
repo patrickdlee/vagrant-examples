@@ -1,0 +1,24 @@
+upstream static_web_cluster {
+  server web1:80;
+  server web2:80;
+}
+
+upstream static_asset_cluster {
+  server static1:80;
+  server static2:80;
+}
+
+server {
+  listen 80;
+  server_name static-site;
+
+  location /assets/ {
+    proxy_pass http://static_asset_cluster;
+    include /etc/nginx/proxy_params;
+  }
+
+  location / {
+    proxy_pass http://static_web_cluster;
+    include /etc/nginx/proxy_params;
+  }
+}

@@ -1,9 +1,9 @@
-upstream web_cluster {
+upstream dynamic_web_cluster {
 	server web1:80;
 	server web2:80;
 }
 
-upstream static_cluster {
+upstream dynamic_asset_cluster {
 	server static1:80;
 	server static2:80;
 }
@@ -12,14 +12,13 @@ server {
 	listen 80;
 	server_name dynamic-site;
 
-	location /static/ {
-		proxy_pass http://static_cluster;
+	location /assets/ {
+		proxy_pass http://dynamic_asset_cluster;
 		include /etc/nginx/proxy_params;
 	}
 
 	location / {
-		proxy_pass http://web_cluster;
+		proxy_pass http://dynamic_web_cluster;
 		include /etc/nginx/proxy_params;
 	}
 }
-
