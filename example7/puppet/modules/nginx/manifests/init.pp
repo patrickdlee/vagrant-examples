@@ -4,7 +4,7 @@
 #
 class nginx {
   package { 'nginx':
-    ensure  => present;
+    ensure => present;
   }
 
   service { 'nginx':

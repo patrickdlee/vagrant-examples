@@ -10,8 +10,8 @@ define nginx_vhosts::vhost() {
       require => Package['nginx'];
 
     "/etc/nginx/sites-enabled/${name}":
-      ensure  => link,
-      target  => "/etc/nginx/sites-available/${name}",
-      notify  => Service['nginx'];
+      ensure => link,
+      target => "/etc/nginx/sites-available/${name}",
+      notify => Service['nginx'];
   }
 }
