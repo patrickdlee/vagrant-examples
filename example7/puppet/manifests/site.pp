@@ -19,7 +19,7 @@ File {
 include baseconfig
 
 node 'proxy' {
-  include nginx, nginx-vhosts
+  include nginx, nginx_vhosts
 }
 
 node 'db' {
@@ -27,7 +27,7 @@ node 'db' {
 }
 
 node 'web1', 'web2' {
-  include apache, apache-vhosts, php
+  include apache, apache_vhosts, php
 }
 
 node 'static1', 'static2' {

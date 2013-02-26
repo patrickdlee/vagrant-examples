@@ -1,11 +1,11 @@
-# == Class: apache-vhosts
+# == Class: apache_vhosts
 #
 # Adds and enables virtual hosts. Sets up /var/www symlinks.
 #
-class apache-vhosts {
+class apache_vhosts {
   file { '/var/www':
     ensure => directory;
   }
 
-  apache-vhosts::vhost { ['static-site', 'dynamic-site']: }
+  apache_vhosts::vhost { ['dynamic-site']: }
 }

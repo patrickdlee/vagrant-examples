@@ -19,7 +19,7 @@ File {
 include baseconfig
 
 node 'web' {
-  include apache, apache-vhosts, php
+  include apache, apache_vhosts, php
 }
 
 node 'db' {
