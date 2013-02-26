@@ -12,9 +12,20 @@ class lighttpd {
     require => Package['lighttpd'];
   }
 
-  file { '/etc/lighttpd/lighttpd.conf':
-    source  => 'puppet:///modules/lighttpd/lighttpd.conf',
-    require => Package['lighttpd'],
-    notify  => Service['lighttpd'];
+  file {
+    "/var/www/static-site":
+      ensure => link,
+      target => "/vagrant/sites/static-site";
+
+    "/var/www/dynamic-site":
+      ensure => link,
+      target => "/vagrant/sites/dynamic-site";
+
+    '/etc/lighttpd/lighttpd.conf':
+      source  => 'puppet:///modules/lighttpd/lighttpd.conf',
+      require => Package['lighttpd'],
+      notify  => Service['lighttpd'];
   }
+
+  lighttpd::module { ['10-accesslog.conf']: }
 }
