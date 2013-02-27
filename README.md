@@ -34,6 +34,6 @@ vagrant ssh
 2. Single box with some custom options defined in variables.
 3. Single box with example configuration defined in one Puppet module.
 4. Single box with Apache and sample static site installed via Puppet.
-5. Single box with LAMP stack and sample dynamic site via Puppet.
+5. Single box with LAMP stack and sample static/dynamic sites via Puppet.
 6. Separate Web and database servers serving up static/dynamic sites via Puppet.
 7. Pulling out all the stops with cluster of seven Vagrant boxes.

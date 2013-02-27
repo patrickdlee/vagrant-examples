@@ -3,10 +3,10 @@ CREATE DATABASE IF NOT EXISTS dynamic;
 
 -- create a new user for the Web app
 DELETE FROM mysql.user WHERE User = 'webuser';
-CREATE USER 'webuser'@'localhost' IDENTIFIED BY 'vagrantrocks';
+CREATE USER 'webuser'@'%' IDENTIFIED BY 'vagrantrocks';
 
 -- grant only the necessary privileges to our new user
-GRANT SELECT, INSERT, UPDATE, DELETE ON dynamic.* TO 'webuser'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dynamic.* TO 'webuser'@'%';
 
 -- make this our active database
 USE dynamic;

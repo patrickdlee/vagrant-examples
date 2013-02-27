@@ -1,6 +1,6 @@
 # Example 5
 #
-# Single box with LAMP stack and sample dynamic site via Puppet.
+# Single box with LAMP stack and sample static/dynamic sites via Puppet.
 #
 box      = 'precise32'
 url      = 'http://files.vagrantup.com/precise32.box'
