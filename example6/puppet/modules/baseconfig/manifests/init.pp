@@ -7,8 +7,15 @@ class baseconfig {
     command => '/usr/bin/apt-get update';
   }
 
-  host { 'hostmachine':
-    ip => '192.168.0.1';
+  host {
+    'hostmachine':
+      ip => '192.168.0.1';
+
+    'web':
+      ip => '192.168.0.42';
+
+    'db':
+      ip => '192.168.0.43';
   }
 
   file {
