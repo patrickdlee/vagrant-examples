@@ -7,4 +7,3 @@
 </head>
 <body>
 <div id="container">
-    <h1>Vagrant Wish List</h1>

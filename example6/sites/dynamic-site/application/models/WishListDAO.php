@@ -3,31 +3,42 @@ require_once APPLICATION_DIR . '/models/WishListItem.php';
 
 class WishListDAO
 {
-    private $mysqli;
+    private $pdo;
 
     public function __construct() {
-        $this->mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        if ($this->mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: " . $this->mysqli->connect_error;
-        }
+        $this->pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
+    }
+
+    public function getItem($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM WishListItem WHERE id = :id");
+        $stmt->execute(array(':id' => $id));
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS, 'WishListItem');
+        return $result[0];
     }
 
     public function getAllItems() {
-        $items = array();
-
-        $result = $this->mysqli->query("SELECT * FROM WishListItem ORDER BY id");
-        while ($row = $result->fetch_object()) {
-            $items[] = $this->mapRowToItem($row);
-        }
-
-        return $items;
+        $query = "SELECT id, name, description FROM WishListItem ORDER BY id";
+        $result = $this->pdo->query($query);
+        $result->setFetchMode(PDO::FETCH_CLASS, 'WishListItem');
+        return $result->fetchAll();
     }
 
-    private function mapRowToItem($row) {
-        $item = new WishListItem();
-        $item->setId($row->id);
-        $item->setName($row->name);
-        $item->setDescription($row->description);
-        return $item;
+    public function addItem($name, $description) {
+        $query = "INSERT INTO WishListItem (name, description) VALUES (:name, :desc)";
+        $params = array(':name' => $name, ':desc' => $description);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+    }
+
+    public function editItem($id, $name, $description) {
+        $query = "UPDATE WishListItem SET name = :name, description = :desc WHERE id = :id";
+        $params = array(':id' => $id, ':name' => $name, ':desc' => $description);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+    }
+
+    public function deleteItem($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM WishListItem WHERE id = :id");
+        $stmt->execute(array(':id' => $id));
     }
 }
