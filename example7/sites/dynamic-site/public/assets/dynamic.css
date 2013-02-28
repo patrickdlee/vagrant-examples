@@ -11,6 +11,21 @@ p {
     margin-top: 12px;
 }
 
+input#name, input#desc {
+    width: 300px;
+}
+
+input#add, input#edit, input#delete {
+    color: #FFF;
+    font: bold 18px Arial, sans-serif;
+    background: #070;
+    padding: 7px 14px;
+}
+
+input#delete {
+    background: #700;
+}
+
 table th, table td {
     padding: 8px;
     border: 1px solid #777;

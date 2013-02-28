@@ -10,7 +10,7 @@
     </p>
     <p>
         <input type="hidden" name="id" value="<?= $item->getId() ?>"/>
-        <input type="submit" name="edit" value="Edit"/>
-        <input type="submit" name="delete" value="Delete"/>
+        <input type="submit" id="edit" name="edit" value="Edit"/>
+        <input type="submit" id="delete" name="delete" value="Delete"/>
     </p>
 </form>

@@ -9,6 +9,6 @@
         <input type="text" id="desc" name="desc"/>
     </p>
     <p>
-        <input type="submit" name="add" value="Add"/>
+        <input type="submit" id="add" name="add" value="Add"/>
     </p>
 </form>
