@@ -7,6 +7,10 @@ h1 {
     margin-bottom: 15px;
 }
 
+p {
+    margin-top: 12px;
+}
+
 table th, table td {
     padding: 8px;
     border: 1px solid #777;
