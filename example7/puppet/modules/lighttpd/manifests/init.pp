@@ -13,13 +13,18 @@ class lighttpd {
   }
 
   file {
+    '/var/www':
+      ensure => directory;
+      
     '/var/www/static-site':
-      ensure => link,
-      target => '/vagrant/sites/static-site';
+      ensure  => link,
+      target  => '/vagrant/sites/static-site',
+      require => File['/var/www'];
 
     '/var/www/dynamic-site':
-      ensure => link,
-      target => '/vagrant/sites/dynamic-site/public';
+      ensure  => link,
+      target  => '/vagrant/sites/dynamic-site/public',
+      require => File['/var/www'];
 
     '/etc/lighttpd/lighttpd.conf':
       source  => 'puppet:///modules/lighttpd/lighttpd.conf',
