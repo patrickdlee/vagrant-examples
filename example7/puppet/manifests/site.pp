@@ -18,22 +18,22 @@ File {
 # all boxes get the base config
 include baseconfig
 
-node 'proxy' {
+node 'ex7proxy' {
   include nginx, nginx_vhosts
 }
 
-node 'db' {
+node 'ex7db' {
   include mysql
 }
 
-node 'web1', 'web2' {
+node 'ex7web1', 'ex7web2' {
   include apache, apache_vhosts, php
 }
 
-node 'static1', 'static2' {
+node 'ex7static1', 'ex7static2' {
   include lighttpd
 }
 
-node 'cache' {
+node 'ex7cache' {
   include memcache
 }

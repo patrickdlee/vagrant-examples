@@ -5,8 +5,8 @@
 domain = 'example.com'
 
 nodes = [
-  { :hostname => 'web', :ip => '192.168.0.42', :box => 'precise32' },
-  { :hostname => 'db',  :ip => '192.168.0.43', :box => 'precise32', :ram => 512 }
+  { :hostname => 'ex6web', :ip => '192.168.0.42', :box => 'precise32' },
+  { :hostname => 'ex6db',  :ip => '192.168.0.43', :box => 'precise32', :ram => 512 }
 ]
 
 Vagrant::Config.run do |config|

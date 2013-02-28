@@ -5,13 +5,13 @@
 domain   = 'example.com'
 
 nodes = [
-  { :hostname => 'proxy',   :ip => '192.168.0.42', :box => 'precise32' },
-  { :hostname => 'db',      :ip => '192.168.0.43', :box => 'precise32' },
-  { :hostname => 'web1',    :ip => '192.168.0.44', :box => 'precise32' },
-  { :hostname => 'web2',    :ip => '192.168.0.45', :box => 'precise32' },
-  { :hostname => 'static1', :ip => '192.168.0.46', :box => 'precise32' },
-  { :hostname => 'static2', :ip => '192.168.0.47', :box => 'precise32' },
-  { :hostname => 'cache',   :ip => '192.168.0.48', :box => 'precise32' },
+  { :hostname => 'ex7proxy',   :ip => '192.168.0.42', :box => 'precise32' },
+  { :hostname => 'ex7db',      :ip => '192.168.0.43', :box => 'precise32' },
+  { :hostname => 'ex7web1',    :ip => '192.168.0.44', :box => 'precise32' },
+  { :hostname => 'ex7web2',    :ip => '192.168.0.45', :box => 'precise32' },
+  { :hostname => 'ex7static1', :ip => '192.168.0.46', :box => 'precise32' },
+  { :hostname => 'ex7static2', :ip => '192.168.0.47', :box => 'precise32' },
+  { :hostname => 'ex7cache',   :ip => '192.168.0.48', :box => 'precise32' },
 ]
 
 Vagrant::Config.run do |config|
