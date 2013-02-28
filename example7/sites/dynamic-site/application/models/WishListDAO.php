@@ -6,6 +6,9 @@ class WishListDAO
     private $pdo;
     private $memcache;
 
+    const ALL_ITEMS_KEY = 'allItems';
+    const CACHE_LIFETIME = 15;
+
     public function __construct() {
         // establish connection to MySQL
         $this->pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
@@ -24,7 +27,7 @@ class WishListDAO
 
     public function getAllItems() {
         // check if the items are in Memcache
-        $items = $this->memcache->get('allItems');
+        $items = $this->memcache->get(self::ALL_ITEMS_KEY);
         if (is_array($items)) {
             return $items;
         }
@@ -35,8 +38,8 @@ class WishListDAO
         $result->setFetchMode(PDO::FETCH_CLASS, 'WishListItem');
         $items = $result->fetchAll();
 
-        // store the items in Memcache for ten seconds
-        $this->memcache->set('allItems', $items, MEMCACHE_COMPRESSED, 10);
+        // store the items in Memcache for a short time
+        $this->memcache->set(self::ALL_ITEMS_KEY, $items, MEMCACHE_COMPRESSED, self::CACHE_LIFETIME);
 
         return $items;
     }
