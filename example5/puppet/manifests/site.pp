@@ -18,10 +18,10 @@ File {
 # all boxes get the base config
 include baseconfig
 
-node 'ex6web' {
+node 'ex5web' {
   include apache, apache_vhosts, php
 }
 
-node 'ex6db' {
+node 'ex5db' {
   include mysql
 }

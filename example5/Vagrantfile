@@ -1,0 +1,36 @@
+# Example 5
+#
+# Separate Web and database servers serving up static/dynamic sites via Puppet.
+#
+# NOTE: Make sure you have the precise32 base box installed...
+# vagrant box add precise32 http://files.vagrantup.com/precise32.box
+
+nodes = [
+  { :hostname => 'ex5web', :ip => '192.168.0.42', :box => 'precise32' },
+  { :hostname => 'ex5db',  :ip => '192.168.0.43', :box => 'precise32', :ram => 512 }
+]
+
+Vagrant.configure("2") do |config|
+  nodes.each do |node|
+    config.vm.define node[:hostname] do |nodeconfig|
+      nodeconfig.vm.box = "precise32"
+      nodeconfig.vm.hostname = node[:hostname] + ".box"
+      nodeconfig.vm.network :private_network, ip: node[:ip]
+
+      memory = node[:ram] ? node[:ram] : 256;
+      nodeconfig.vm.provider :virtualbox do |vb|
+        vb.customize [
+          "modifyvm", :id,
+          "--cpuexecutioncap", "50",
+          "--memory", memory.to_s,
+        ]
+      end
+    end
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file = "site.pp"
+    puppet.module_path = "puppet/modules"
+  end
+end
