@@ -1,29 +1,26 @@
 # Example 3
 #
-# Single box with example configuration defined in one Puppet module.
+# Single box with VirtualBox provider and Puppet provisioning.
 #
-box      = 'precise32'
-url      = 'http://files.vagrantup.com/precise32.box'
-hostname = 'myprecisebox'
-domain   = 'example.com'
-ip       = '192.168.0.42'
-ram      = '256'
+# NOTE: Make sure you have the precise32 base box installed...
+# vagrant box add precise32 http://files.vagrantup.com/precise32.box
 
-Vagrant::Config.run do |config|
-  config.vm.box = box
-  config.vm.box_url = url
-  config.vm.host_name = hostname + '.' + domain
-  config.vm.network :hostonly, ip
+Vagrant.configure("2") do |config|
+  config.vm.box = "precise32"
+  config.vm.hostname = "myprecise.box"
+  config.vm.network :private_network, ip: "192.168.0.42"
 
-  config.vm.customize [
-    'modifyvm', :id,
-    '--name', hostname,
-    '--memory', ram
-  ]
+  config.vm.provider :virtualbox do |vb|
+    vb.customize [
+      "modifyvm", :id,
+      "--cpuexecutioncap", "50",
+      "--memory", "256",
+    ]
+  end
 
   config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = 'puppet/manifests'
-    puppet.manifest_file = 'site.pp'
-    puppet.module_path = 'puppet/modules'
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file = "site.pp"
+    puppet.module_path = "puppet/modules"
   end
 end
