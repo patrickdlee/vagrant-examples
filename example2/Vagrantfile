@@ -15,9 +15,11 @@ Vagrant::Config.run do |config|
   config.vm.host_name = hostname + '.' + domain
   config.vm.network :hostonly, ip
 
-  config.vm.customize [
-    'modifyvm', :id,
-    '--name', hostname,
-    '--memory', ram
-  ]
+  config.vm "virtualbox" do |v|
+  	v.customize[
+        'modifyvm', :id,
+        '--name', node[:hostname],
+        '--memory', memory.to_s
+      ]
+  end
 end
