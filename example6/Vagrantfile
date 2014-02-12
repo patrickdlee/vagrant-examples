@@ -17,11 +17,13 @@ Vagrant::Config.run do |config|
       node_config.vm.network :hostonly, node[:ip]
 
       memory = node[:ram] ? node[:ram] : 256;
-      node_config.vm.customize [
-        'modifyvm', :id,
-        '--name', node[:hostname],
-        '--memory', memory.to_s
-      ]
+       node_config.vm "virtualbox" do |v|
+      	v.customize[
+	        'modifyvm', :id,
+	        '--name', node[:hostname],
+	        '--memory', memory.to_s
+	      ]
+      end
     end
   end
 
