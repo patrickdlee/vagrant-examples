@@ -1,4 +1,4 @@
-<h1>Vagrant Wish List (Example 7)</h1>
+<h1>Vagrant Wish List on EC2 (Example 7)</h1>
 <table>
     <tr>
         <th></th>

@@ -11,6 +11,10 @@ class baseconfig {
     ip => '192.168.0.1';
   }
 
+  package { ['htop', 'tree', 'unzip']:
+    ensure => present;
+  }
+
   file {
     '/home/vagrant/.bashrc':
       owner => 'vagrant',

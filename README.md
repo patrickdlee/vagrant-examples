@@ -10,30 +10,27 @@ This is a collection of sample Vagrant configurations using Puppet. They start o
 
 ## How do I install Vagrant?
 
-The host OS used in testing these examples was Mint 14 (Ubuntu-based), but any OS should work as long as Ruby, RubyGems, and VirtualBox can be installed. Here is the installation procedure for Debian-based systems...
-
-```
-sudo apt-get install rubygems ruby1.9.1-dev virtualbox-4.2
-sudo gem install vagrant
-```
-
-Yes, it's that simple. There are other ways to install Vagrant such as pre-built packages and stand-alone installers, but the examples in this project have been confirmed to work only with the Vagrant Ruby gem (v1.0.6). Your mileage may vary with other installation methods. The [Vagrant download page](http://downloads.vagrantup.com/tags/v1.0.6) lists several options for installing v1.0.6.
+The host OS used in testing these examples was Mint 14 (Ubuntu-based), but any OS should work as long as VirtualBox can be installed. The Vagrant version used in these examples is v1.1.0. The [Vagrant download page](http://downloads.vagrantup.com/tags/v1.1.0) lists several options for installing v1.1.0.
 
 ## How do I run the examples?
 
 From one of the example directories, type the following commands...
 
 ```
+vagrant box add precise32 http://files.vagrantup.com/precise32.box
 vagrant up
 vagrant ssh
+vagrant destroy
 ```
+
+These commands will bring up the Vagrant box, SSH into it, and then remove it respectively.
 
 ## Summary of examples
 
-1. Single box with default options.
-2. Single box with some custom options defined in variables.
-3. Single box with example configuration defined in one Puppet module.
+1. Single box with some custom configuration.
+2. Single box with VirtualBox provider.
+3. Single box with VirtualBox provider and Puppet provisioning.
 4. Single box with Apache and sample static site installed via Puppet.
-5. Single box with LAMP stack and sample static/dynamic sites via Puppet.
-6. Separate Web and database servers serving up static/dynamic sites via Puppet.
-7. Pulling out all the stops with cluster of seven Vagrant boxes.
+5. Separate Web and database servers serving up static/dynamic sites via Puppet.
+6. Pulling out all the stops with cluster of seven Vagrant boxes.
+7. Single box with AWS provider and sample static/dynamic sites via Puppet.

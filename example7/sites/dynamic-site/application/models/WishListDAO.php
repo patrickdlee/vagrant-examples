@@ -4,18 +4,9 @@ require_once APPLICATION_DIR . '/models/WishListItem.php';
 class WishListDAO
 {
     private $pdo;
-    private $memcache;
-
-    const ALL_ITEMS_KEY = 'allItems';
-    const CACHE_LIFETIME = 15;
 
     public function __construct() {
-        // establish connection to MySQL
         $this->pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
-
-        // establish connection to Memcache
-        $this->memcache = new Memcache();
-        $this->memcache->connect(CACHE_HOST, CACHE_PORT);
     }
 
     public function getItem($id) {
@@ -26,22 +17,10 @@ class WishListDAO
     }
 
     public function getAllItems() {
-        // check if the items are in Memcache
-        $items = $this->memcache->get(self::ALL_ITEMS_KEY);
-        if (is_array($items)) {
-            return $items;
-        }
-
-        // fetch the items from the database
         $query = "SELECT id, name, description FROM WishListItem ORDER BY id";
         $result = $this->pdo->query($query);
         $result->setFetchMode(PDO::FETCH_CLASS, 'WishListItem');
-        $items = $result->fetchAll();
-
-        // store the items in Memcache for a short time
-        $this->memcache->set(self::ALL_ITEMS_KEY, $items, MEMCACHE_COMPRESSED, self::CACHE_LIFETIME);
-
-        return $items;
+        return $result->fetchAll();
     }
 
     public function addItem($name, $description) {

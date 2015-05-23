@@ -15,25 +15,4 @@ File {
   mode  => '0644',
 }
 
-# all boxes get the base config
-include baseconfig
-
-node 'ex7proxy' {
-  include nginx, nginx_vhosts
-}
-
-node 'ex7db' {
-  include mysql
-}
-
-node 'ex7web1', 'ex7web2' {
-  include apache, apache_vhosts, php
-}
-
-node 'ex7static1', 'ex7static2' {
-  include lighttpd
-}
-
-node 'ex7cache' {
-  include memcache
-}
+include baseconfig, apache, mysql, php, apache_vhosts
