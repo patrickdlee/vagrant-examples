@@ -2,7 +2,7 @@
 
 ## What is Vagrant?
 
-Vagrant is a tool that uses Oracle's VirtualBox to dynamically build configurable, lightweight, and portable virtual machines. Vagrant supports the use of either Puppet or Chef for managing the configuration. Much more information is available on the [Vagrant web site](http://www.vagrantup.com).
+Vagrant is an open-source software product for building and maintaining portable virtual software development environments. Vagrant supports the use of different configuration managment tools for managing the configuration of these environments. Much more information is available on the [Vagrant web site](http://www.vagrantup.com).
 
 ## What is this project?
 
